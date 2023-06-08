@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <title>Sample inaccessible site</title>
+  </head>
+  <body>
+    <strong>Sample inaccessible site</strong>
+    <p>This is a site that is intentionally made to be inaccessible.</p>
+    <p role="invalid">
+      This paragraph has been given an invalid <code>role</code> attiribute and
+      will be picked up by
+      <a href="https://github.com/GovTechSG/purple-hats"> Purple HATS </a>
+      during a scan.
+    </p>
+    <button onclick="toggleSecondSection()">Click Me</button>
+    <div id="second-section" style="visibility: hidden">
+      <p>Welcome to the second section of this inaccessible site.</p>
+      <div style="background-color: deepskyblue">
+        <p style="color: gray">Some text with bad contrast.</p>
+      </div>
+      <p>Some inputs and button with no labels.</p>
+      <input type="text" />
+      <input type="text" />
+      <button></button>
+    </div>
+    <script>
+      let isSecondSectionVisible = false;
+      function toggleSecondSection() {
+        document.getElementById("second-section").style.visibility =
+          isSecondSectionVisible ? "hidden" : "visible";
+        isSecondSectionVisible = !isSecondSectionVisible;
+      }
+    </script>
+  </body>
+</html>
