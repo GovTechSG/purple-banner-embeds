@@ -9,6 +9,7 @@
     body {
       margin: 0px !important;
       font-family: Helvetica, sans-serif;
+      min-height: 100vh;
     }
 
     p {
@@ -34,9 +35,44 @@
       line-height: 2rem;
     }
 
-    #guide-content {
+    #content-body {
       background-color: #f1f5f9;
       padding: 1rem;
+      min-height: calc(100vh - 150px);
+    }
+
+    #vendor-selector {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      select {
+        width: 100%;
+        min-height: 1.75rem;
+        font-size: 1rem;
+      }
+    }
+
+    #select-btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+
+      button {
+        min-height: 2rem;
+        padding: 0.5rem 2rem;
+        border-color: transparent;
+        border-radius: 4px;
+        background-color: #785EF0;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #644bd3;
+      }
     }
 
     .guide-container {
@@ -56,6 +92,10 @@
         font-weight: bold;
       }
     }
+
+    .text-bold {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -64,10 +104,26 @@
     <img src="/images/a11y-logo.svg" alt="A11y logo" />
     <h2>Mobile A11y Permissions Guide</h2>
   </div>
-  <div id="guide-content"></div>
+  <div id="content-body">
+    <div id="vendor-selector-container">
+      <div id="vendor-selector">
+        <label for="device-vendor" class="text-bold">Vendor</label>
+        <select name="vendors" id="device-vendor">
+          <option value="google-pixel">Google Pixel</option>
+          <option value="poco">Poco</option>
+          <option value="samsung">Samsung</option>
+          <option value="xiaomi">Xiaomi</option>
+        </select>
+      </div>
+      <div id="select-btn-container">
+        <button onclick="selectVendor()">SELECT VENDOR</button>
+      </div>
+    </div>
+    <div id="guide-content"></div>
+  </div>
 
   <script>
-    const loadPage = (href) => {
+    const getPage = (href) => {
       fetch(href)
         .then(res => res.text())
         .then(html => {
@@ -78,24 +134,44 @@
   </script>
 
   <script>
-    const url = new URL(window.location.href);
-    let vendor = url.searchParams.get("vendor");
-    let stepsGuideHtml = '';
-    switch (vendor) {
-      case "google-pixel":
-        stepsGuideHtml = loadPage('google-pixel.html');
-        break;
-      case "samsung":
-        stepsGuideHtml = loadPage('samsung.html');
-        break;
-      case "xiaomi":
-      case "poco":
-        stepsGuideHtml = loadPage('xiaomi.html');
-        break;
-      case "redmi":
-        break;
+    const loadGuide = (vendor) => {
+      let stepsGuideHtml = '';
+      switch (vendor) {
+        case "google-pixel":
+          stepsGuideHtml = getPage('google-pixel.html');
+          break;
+        case "samsung":
+          stepsGuideHtml = getPage('samsung.html');
+          break;
+        case "xiaomi":
+        case "poco":
+          stepsGuideHtml = getPage('xiaomi.html');
+          break;
+        case "redmi":
+          break;
+      }
+      if (stepsGuideHtml !== '') {
+        document.getElementById("guide-content").innerHTML = stepsGuideHtml;
+        if (document.getElementById("device-vendor").value !== vendor) {
+          document.getElementById("device-vendor").value = vendor;
+        }
+      }
     }
-    document.getElementById("guide-content").innerHTML = stepsGuideHtml;
+
+    const selectVendor = () => {
+      const selectedVendor = document.getElementById("device-vendor").value;
+      loadGuide(selectedVendor);
+    }
+
+    const handleVendorSelector = (viewType) => {
+      if (viewType === "static") {
+        document.getElementById("vendor-selector-container").replaceChildren();
+      }
+    }
+
+    const url = new URL(window.location.href);
+    handleVendorSelector(url.searchParams.get("view"));
+    loadGuide(url.searchParams.get("vendor"));
   </script>
 </body>
 
