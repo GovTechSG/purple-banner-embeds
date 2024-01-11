@@ -1,13 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobile A11y Guide (Testing)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile A11y Guide (Testing)</title>
+  <style>
+    body {
+      padding: 1rem;
+    }
+
+    .text-cap {
+      text-transform: capitalize;
+    }
+
+    #steps-guide-container {
+      img {
+        max-width: 90vw;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <h1>Mobile A11y Permissions Guide</h1>
+  <h2 id="vendor-label" class="text-cap"></h2>
+  <hr />
+  <div id="steps-guide-container"></div>
 
-<!-- Content goes here -->
+  <script>
+    const createElementFromString = (htmlString) => {
+      const tempContainer = document.createElement('div');
+      tempContainer.innerHTML = htmlString.trim();
+      return tempContainer.firstChild;
+    }
+  </script>
 
+  <script>
+    const url = new URL(window.location.href);
+    let vendor = url.searchParams.get("vendor");
+    document.getElementById("vendor-label").innerHTML = `Vendor: ${vendor.replace('-', ' ')}`;
+
+    let stepsGuideHtml = '';
+    switch (vendor) {
+      case "google-pixel":
+        stepsGuideHtml = `
+            <section>
+            </section>
+        `;
+        break;
+      case "samsung":
+        stepsGuideHtml = `
+            <section>
+            </section>
+        `;
+        break;
+      case "xiaomi":
+        stepsGuideHtml = `
+            <section>
+                <p> Step 1: Go to app info </p>
+                <p> Step 2: Tap on the 3 dots </p>
+                <p> Step 3: Enable "Allow restricted settings" </p>
+                <img src="../../images/xiaomi-1.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 4: You'll be asked for your passcode. </p>
+                <p> Step 5: Go to Settings > Additional settings > Accessibility > Vision </p>
+                <p> Step 6: Turn on A11y Scanner </p>
+                <img src="../../images/xiaomi-2.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 7: Accept the security prompt </p>
+                <img src="../../images/xiaomi-3.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 8: Go to app info. Turn off Battery Saver </p>
+                <img src="../../images/xiaomi-4.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <img src="../../images/xiaomi-5.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+            </section>
+        `;
+        break;
+      case "poco":
+        stepsGuideHtml = `
+            <section>
+                <p> Step 1: Go to app info </p>
+                <p> Step 2: Tap on the 3 dots </p>
+                <p> Step 3: Enable "Allow restricted settings" </p>
+                <img src="../../images/xiaomi-1.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 4: You'll be asked for your passcode. </p>
+                <p> Step 5: Go to Settings > Additional settings > Accessibility > Vision </p>
+                <p> Step 6: Turn on A11y Scanner </p>
+                <img src="../../images/xiaomi-2.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 7: Accept the security prompt </p>
+                <img src="../../images/xiaomi-3.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <p> Step 8: Go to app info. Turn off Battery Saver </p>
+                <img src="../../images/xiaomi-4.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+                <img src="../../images/xiaomi-5.png" alt="Screenshot of where the Allow restricted settings toggle is" />
+            </section>
+        `;
+        break;
+      case "redmi":
+        stepsGuideHtml = `
+            <section>
+                <p> Step 1: </p>
+            </section>
+        `;
+        break;
+    }
+    document.getElementById("steps-guide-container").replaceChildren(createElementFromString(stepsGuideHtml));
+  </script>
 </body>
+
 </html>
