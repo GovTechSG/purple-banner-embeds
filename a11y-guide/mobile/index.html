@@ -7,119 +7,100 @@
   <title>Mobile A11y Guide (Testing)</title>
   <style>
     body {
+      margin: 0px !important;
+      font-family: Helvetica, sans-serif;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: #f8fafc;
+      padding: 1rem;
+      text-align: right;
+
+      p {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #5c5c5c;
+      }
+    }
+
+    #guide-header {
+      padding: 0 1rem;
+      display: flex;
+      gap: 0.75rem;
+      line-height: 2rem;
+    }
+
+    #guide-content {
+      background-color: #f8fafc;
       padding: 1rem;
     }
 
-    .text-cap {
-      text-transform: capitalize;
+    .guide-container {
+      img {
+        max-width: 100%;
+      }
     }
 
-    #steps-guide-container {
-      img {
-        max-width: 90vw;
+    .step-container {
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1rem 0;
+      background-color: white;
+
+      p {
+        font-weight: bold;
       }
     }
   </style>
 </head>
 
 <body>
-  <h1>Mobile A11y Permissions Guide</h1>
-  <h2 id="vendor-label" class="text-cap"></h2>
-  <hr />
-  <div id="steps-guide-container"></div>
+  <div id="guide-header">
+    <img src="/images/a11y-logo.svg" alt="A11y logo" />
+    <h2>Mobile A11y Permissions Guide</h2>
+  </div>
+  <div id="guide-content"></div>
 
   <script>
-    const createElementFromString = (htmlString) => {
-      const tempContainer = document.createElement('div');
-      tempContainer.innerHTML = htmlString.trim();
-      return tempContainer.firstChild;
+    const loadPage = (href) => {
+      fetch(href)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('guide-content').innerHTML = html;
+        })
+        .catch(err => console.error('Error loading file: ', err));
     }
   </script>
 
   <script>
     const url = new URL(window.location.href);
     let vendor = url.searchParams.get("vendor");
-    document.getElementById("vendor-label").innerHTML = `Vendor: ${vendor.replace('-', ' ')}`;
-
     let stepsGuideHtml = '';
     switch (vendor) {
       case "google-pixel":
-        stepsGuideHtml = `
-            <section>
-                <p> Step 1: Go to Settings > Accessibility </p>
-                <img src="../../images/pixel/ss-1.jpg" alt="Screenshot of where the Accessibility setting is" />
-                <p> Step 2: Click on the A11y Scanner app under Downloaded apps </p>
-                <img src="../../images/pixel/ss-2.jpg" alt="Screenshot to choose the A11y Scanner app" />
-                <p> Step 3: Enable the toggle beside “Use A11y Scanner” </p>
-                <img src="../../images/pixel/ss-3.jpg" alt="Screenshot to enable Use A11y Scanner" />
-                <p> Step 4: Click “Allow” in the security prompt </p>
-                <img src="../../images/pixel/ss-4.jpg" alt="Screenshot of the security prompt" />
-                </section>
-                `;
+        stepsGuideHtml = loadPage('google-pixel.html');
         break;
       case "samsung":
-        stepsGuideHtml = `
-            <section>
-                <p> Step 1: Go to Settings > Accessibility > Installed apps </p>
-                <img src="../../images/samsung/ss-1.jpg" alt="Screenshot of where the Accessibility setting is" />
-                <img src="../../images/samsung/ss-2.jpg" alt="Screenshot of where the Installed apps setting is" />
-                <p> Step 2: Click on the A11y Scanner app </p>
-                <img src="../../images/samsung/ss-3.jpg" alt="Screenshot to select the A11y Scanner app setting" />
-                <p> Step 3: Enable the toggle beside “Off” </p>
-                <img src="../../images/samsung/ss-4.jpg" alt="Screenshot to enable permission toggle" />
-                <p> Step 4: Click “Allow” in the security prompt </p>
-                <img src="../../images/samsung/ss-5.jpg" alt="Screenshot of security prompt" />
-            </section>
-        `;
+        stepsGuideHtml = loadPage('samsung.html');
         break;
       case "xiaomi":
-        stepsGuideHtml = `
-            <section>
-                <p> Step 1: Go to app info </p>
-                <p> Step 2: Tap on the 3 dots </p>
-                <p> Step 3: Enable "Allow restricted settings" </p>
-                <img src="../../images/xiaomi/1.png" alt="Screenshot of where the Allow restricted settings toggle is" />
-                <p> Step 4: You'll be asked for your passcode. </p>
-                <p> Step 5: Go to Settings > Additional settings > Accessibility > Vision </p>
-                <p> Step 6: Turn on A11y Scanner </p>
-                <img src="../../images/xiaomi/2.png" alt="Screenshot of how to turn on A11y Scanner" />
-                <p> Step 7: Accept the security prompt </p>
-                <img src="../../images/xiaomi/3.png" alt="Screenshot of where the what the security prompt is" />
-                <p> Step 8: Go to app info. Turn off Battery Saver </p>
-                <img src="../../images/xiaomi/4.png" alt="Screenshot of where the battery saver is" />
-                <img src="../../images/xiaomi/5.png" alt="Screenshot of how to turn off battery saver" />
-            </section>
-        `;
-        break;
       case "poco":
-        stepsGuideHtml = `
-            <section>
-                <p> Step 1: Go to app info </p>
-                <p> Step 2: Tap on the 3 dots </p>
-                <p> Step 3: Enable "Allow restricted settings" </p>
-                <img src="../../images/xiaomi/1.png" alt="Screenshot of where the Allow restricted settings toggle is" />
-                <p> Step 4: You'll be asked for your passcode. </p>
-                <p> Step 5: Go to Settings > Additional settings > Accessibility > Vision </p>
-                <p> Step 6: Turn on A11y Scanner </p>
-                <img src="../../images/xiaomi/2.png" alt="Screenshot of how to turn on A11y Scanner" />
-                <p> Step 7: Accept the security prompt </p>
-                <img src="../../images/xiaomi/3.png" alt="Screenshot of where the what the security prompt is" />
-                <p> Step 8: Go to app info. Turn off Battery Saver </p>
-                <img src="../../images/xiaomi/4.png" alt="Screenshot of where the battery saver is" />
-                <img src="../../images/xiaomi/5.png" alt="Screenshot of how to turn off battery saver" />
-            </section>
-        `;
+        stepsGuideHtml = loadPage('xiaomi.html');
         break;
       case "redmi":
-        stepsGuideHtml = `
-            <section>
-                <p> Step 1: </p>
-            </section>
-        `;
         break;
     }
-    document.getElementById("steps-guide-container").replaceChildren(createElementFromString(stepsGuideHtml));
+    document.getElementById("guide-content").innerHTML = stepsGuideHtml;
   </script>
 </body>
+
+<footer>
+  <p>© 2024 Government Technology Agency, Last Updated 09 Jan 2024</p>
+</footer>
 
 </html>
