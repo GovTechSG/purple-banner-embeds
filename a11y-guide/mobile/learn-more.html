@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile A11y Guide - Android Accessibility Permissions</title>
+  <style>
+    body {
+      margin: 0px !important;
+      font-family: Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: #f1f5f9;
+      padding: 1rem;
+      text-align: right;
+
+      p {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #5c5c5c;
+      }
+    }
+
+    #site-header {
+      padding: 0 1rem;
+      display: flex;
+      gap: 0.75rem;
+      line-height: 2rem;
+    }
+
+    #content-body {
+      background-color: #f1f5f9;
+      padding: 1rem;
+      min-height: calc(100vh - 150px);
+    }
+
+    #vendor-selector {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      select {
+        width: 100%;
+        min-height: 1.75rem;
+        font-size: 1rem;
+      }
+    }
+
+    #select-btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+
+      button {
+        min-height: 2rem;
+        padding: 0.5rem 2rem;
+        border-color: transparent;
+        border-radius: 4px;
+        background-color: #785EF0;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #644bd3;
+      }
+    }
+
+    .guide-container {
+      img {
+        max-width: 100%;
+      }
+    }
+
+    .step-container {
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1rem 0;
+      background-color: white;
+
+      p {
+        font-weight: bold;
+      }
+    }
+
+    .text-bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="site-header">
+    <img src="./images/a11y-logo.svg" alt="A11y logo" />
+    <h2>Learn more about Android Accessibility Permissions</h2>
+  </div>
+  <div id="content-body">
+    <div id="guide-content"></div>
+  </div>
+</body>
+
+<footer>
+  <p>© 2024 Government Technology Agency, Last Updated 09 Jan 2024</p>
+</footer>
+
+</html>
