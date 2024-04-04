@@ -113,6 +113,7 @@
           <option value="poco">Poco</option>
           <option value="samsung">Samsung</option>
           <option value="xiaomi">Xiaomi</option>
+          <option value="oppo">Oppo</option>
         </select>
       </div>
       <div id="select-btn-container">
@@ -149,6 +150,9 @@
           break;
         case "redmi":
           break;
+        case "oppo":
+          stepsGuideHtml = getPage('oppo.html');
+          break; 
       }
       if (stepsGuideHtml !== '') {
         document.getElementById("guide-content").innerHTML = stepsGuideHtml;
